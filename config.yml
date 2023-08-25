@@ -1,0 +1,19 @@
+environment: <% ENV[ENVIRONMENT, null] %>
+version: <% ENV[VERSION, null] %>
+
+sentry:
+  enabled: <% ENV[SENTRY_ENABLED, true] %>
+  service_name: app
+  level: WARNING
+  breadcrumb_level: INFO
+  environment: <% ENV[ENVIRONMENT, null] %>
+  dsn: <% ENV[SENTRY_DSN, null] %>
+
+flask:
+  debug: <% ENV[FLASK_DEBUG, null] %>
+  use_reloader: <% ENV[USE_RELOADER, null] %>
+  use_debugger: <% ENV[USE_DEBUGGER, null] %>
+
+logging:
+  enabled: <% ENV[LOGGING_ENABLED, true] %>
+  level: DEBUG

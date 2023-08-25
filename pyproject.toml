@@ -1,0 +1,58 @@
+[tool.poetry]
+name = "example-app"
+version = "0.1.0"
+description = ""
+authors = ["Omar Khan <oakhan3@gmail.com>"]
+readme = "README.md"
+packages = [
+    { include = "example_app", from = "src" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+flask = "^2.3.3"
+sentry-sdk = {extras = ["flask"], version = "^1.29.2"}
+gunicorn = "^21.2.0"
+configly = {extras = ["yaml"], version = "^1.0.0"}
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.7.0"
+ruff = "^0.0.285"
+pytest-mock-resources = "^2.9.1"
+responses = "^0.23.3"
+mypy = "^1.5.1"
+coverage = "^7.3.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+extend = 'ruff.toml'
+line-length = 100
+
+[tool.mypy]
+strict_optional = true
+ignore_missing_imports = true
+warn_unused_ignores = true
+check_untyped_defs = true
+incremental = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+exclude_lines = [
+  "pragma: no cover",
+  "if TYPE_CHECKING:",
+  "if __name__ == .__main__.:",
+]
+
+[tool.coverage.run]
+branch = true
+parallel = true
+include = ["src/*"]
+
+[tool.pytest.ini_options]
+doctest_optionflags = "NORMALIZE_WHITESPACE IGNORE_EXCEPTION_DETAIL ELLIPSIS"
+addopts = "--doctest-modules -vv --ff --strict-markers --ignore src/app/__main__.py"
+norecursedirs = ".* build dist *.egg migrations bin"
