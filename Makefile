@@ -1,13 +1,9 @@
-.PHONY: install run format lint test
+.PHONY: install format lint test build run-debug-server run run-docker
 
 VERSION := $(shell git rev-parse --short=8 HEAD)
 
-
 install:
 	poetry install
-
-run:
-	gunicorn --reload -c gunicornconfig.py example_app.__main__:app
 
 format:
 	ruff --fix src tests
@@ -23,3 +19,16 @@ test:
 	coverage combine
 	coverage report
 	coverage xml
+
+build:
+	docker build -t example-app .
+
+run-debug-server:
+	python src/example_app/__main__.py
+
+run:
+	gunicorn --reload -c gunicornconfig.py example_app.__main__:app
+
+run-docker:
+	docker run -p 5000:5000 example-app
+
