@@ -33,7 +33,6 @@ extend-ignore = [
 classmethod-decorators = ["classmethod", "pydantic.root_validator", "pydantic.validator"]
 
 [isort]
-known-first-party = ["ma"]
 order-by-type = false
 
 [per-file-ignores]
